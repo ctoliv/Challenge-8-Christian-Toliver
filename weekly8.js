@@ -40,14 +40,41 @@ const controls = new OrbitControls(
 
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
+// ----------------------------------------------------
+// Texture Loader
+// ----------------------------------------------------
+
+const loader =
+    new THREE.TextureLoader();
+
+const groundColor =
+    loader.load(
+        "textures/textures/ground/color.jpg"
+    );
+
+const wallColor =
+    loader.load(
+        "textures/textures/wall/color.jpg"
+    );
+
+const woodColor =
+    loader.load(
+        "textures/textures/wood/color.jpg"
+    );
+
+const bannerColor =
+    loader.load(
+        "textures/textures/banner/color.png"
+    );
 
 // ----------------------------------------------------
 // Ground Plane
 // ----------------------------------------------------
 const groundGeometry = new THREE.PlaneGeometry(100, 100);
 
-const groundMaterial = new THREE.MeshStandardMaterial({
-    color: 0x66aa66
+const groundMaterial =
+    new THREE.MeshStandardMaterial({
+        map: groundColor
 });
 
 const ground = new THREE.Mesh(
@@ -66,17 +93,17 @@ scene.add(ground);
 
 const basicStoneMaterial =
     new THREE.MeshStandardMaterial({
-        color: 0x777777
+        map: wallColor
     });
 
 const basicWoodMaterial =
     new THREE.MeshStandardMaterial({
-        color: 0x8b5a2b
+        map: woodColor
     });
 
 const basicBannerMaterial =
     new THREE.MeshStandardMaterial({
-        color: 0x8b0000
+        map: bannerColor
     });
 
 
@@ -238,6 +265,7 @@ scene.add(directionalLight);
 // ----------------------------------------------------
 // Toggle Lights
 // ----------------------------------------------------
+
 let lightsOn = true;
 
 document
