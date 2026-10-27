@@ -129,6 +129,83 @@ wall.receiveShadow = true;
 
 scene.add(wall);
 
+// Castle towers and battlements
+for (const towerX of [-12, 12]) {
+    const tower = new THREE.Mesh(
+        new THREE.BoxGeometry(8, 12, 7),
+        basicStoneMaterial
+    );
+
+    tower.position.set(towerX, 6, -12);
+    tower.castShadow = true;
+    tower.receiveShadow = true;
+    scene.add(tower);
+
+    const towerTop = new THREE.Mesh(
+        new THREE.BoxGeometry(8.8, 1.5, 7.8),
+        basicStoneMaterial
+    );
+
+    towerTop.position.set(towerX, 12.75, -12);
+    towerTop.castShadow = true;
+    towerTop.receiveShadow = true;
+    scene.add(towerTop);
+
+    for (const offset of [-3, -1, 1, 3]) {
+        for (const side of [-1, 1]) {
+            const frontMerlon = new THREE.Mesh(
+                new THREE.BoxGeometry(1.5, 1.5, 1.5),
+                basicStoneMaterial
+            );
+            frontMerlon.position.set(towerX + offset, 14.25, -12 + side * 3.2);
+            frontMerlon.castShadow = true;
+            scene.add(frontMerlon);
+
+            const sideMerlon = new THREE.Mesh(
+                new THREE.BoxGeometry(1.5, 1.5, 1.5),
+                basicStoneMaterial
+            );
+            sideMerlon.position.set(towerX + side * 3.7, 14.25, -12 + offset);
+            sideMerlon.castShadow = true;
+            scene.add(sideMerlon);
+        }
+    }
+}
+
+for (const merlonX of [-10, -6, -2, 2, 6, 10]) {
+    const merlon = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 2, 2),
+        basicStoneMaterial
+    );
+
+    merlon.position.set(merlonX, 9, -12);
+    merlon.castShadow = true;
+    scene.add(merlon);
+}
+
+// Stone surround for the wooden gate
+for (const frameX of [-3.6, 3.6]) {
+    const gatePillar = new THREE.Mesh(
+        new THREE.BoxGeometry(1.2, 7.5, 2.2),
+        basicStoneMaterial
+    );
+
+    gatePillar.position.set(frameX, 3.75, -11.4);
+    gatePillar.castShadow = true;
+    gatePillar.receiveShadow = true;
+    scene.add(gatePillar);
+}
+
+const gateLintel = new THREE.Mesh(
+    new THREE.BoxGeometry(8.4, 1.2, 2.2),
+    basicStoneMaterial
+);
+
+gateLintel.position.set(0, 7.4, -11.4);
+gateLintel.castShadow = true;
+gateLintel.receiveShadow = true;
+scene.add(gateLintel);
+
 
 // Wooden Gate
 const gate =
