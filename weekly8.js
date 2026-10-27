@@ -61,24 +61,157 @@ ground.receiveShadow = true;
 scene.add(ground);
 
 // ----------------------------------------------------
-// Example Cube
+// Medieval Courtyard Objects
 // ----------------------------------------------------
-const cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
 
-const cubeMaterial = new THREE.MeshStandardMaterial({
-    color: 0x3366ff
-});
+const basicStoneMaterial =
+    new THREE.MeshStandardMaterial({
+        color: 0x777777
+    });
 
-const cube = new THREE.Mesh(
-    cubeGeometry,
-    cubeMaterial
+const basicWoodMaterial =
+    new THREE.MeshStandardMaterial({
+        color: 0x8b5a2b
+    });
+
+const basicBannerMaterial =
+    new THREE.MeshStandardMaterial({
+        color: 0x8b0000
+    });
+
+
+// Castle Wall
+const wall =
+    new THREE.Mesh(
+        new THREE.BoxGeometry(
+            24,
+            8,
+            2
+        ),
+        basicStoneMaterial
+    );
+
+wall.position.set(
+    0,
+    4,
+    -12
 );
 
-cube.position.y = 2;
-cube.castShadow = true;
+wall.castShadow = true;
+wall.receiveShadow = true;
 
-scene.add(cube);
+scene.add(wall);
 
+
+// Wooden Gate
+const gate =
+    new THREE.Mesh(
+        new THREE.BoxGeometry(
+            6,
+            6,
+            0.8
+        ),
+        basicWoodMaterial
+    );
+
+gate.position.set(
+    0,
+    3,
+    -10.9
+);
+
+gate.castShadow = true;
+
+scene.add(gate);
+
+
+// Left Crate
+const crate1 =
+    new THREE.Mesh(
+        new THREE.BoxGeometry(
+            3,
+            3,
+            3
+        ),
+        basicWoodMaterial
+    );
+
+crate1.position.set(
+    -8,
+    1.5,
+    2
+);
+
+crate1.castShadow = true;
+
+scene.add(crate1);
+
+
+// Right Crate
+const crate2 =
+    new THREE.Mesh(
+        new THREE.BoxGeometry(
+            3,
+            3,
+            3
+        ),
+        basicWoodMaterial
+    );
+
+crate2.position.set(
+    8,
+    1.5,
+    2
+);
+
+crate2.rotation.y =
+    Math.PI / 6;
+
+crate2.castShadow = true;
+
+scene.add(crate2);
+
+
+// Barrel
+const barrel =
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            1.5,
+            1.5,
+            3,
+            24
+        ),
+        basicWoodMaterial
+    );
+
+barrel.position.set(
+    -5,
+    1.5,
+    5
+);
+
+barrel.castShadow = true;
+
+scene.add(barrel);
+
+
+// Banner
+const banner =
+    new THREE.Mesh(
+        new THREE.PlaneGeometry(
+            3,
+            5
+        ),
+        basicBannerMaterial
+    );
+
+banner.position.set(
+    7,
+    5,
+    -10.9
+);
+
+scene.add(banner);
 // ----------------------------------------------------
 // Ambient Light
 // ----------------------------------------------------
@@ -140,7 +273,7 @@ function animate() {
 
     requestAnimationFrame(animate);
 
-    cube.rotation.y += 0.01;
+
 
     controls.update();
 
