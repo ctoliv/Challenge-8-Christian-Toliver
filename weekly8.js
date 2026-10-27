@@ -300,22 +300,63 @@ scene.add(barrel);
 
 
 // Banner
+const bannerGeometry = new THREE.PlaneGeometry(3, 5, 12, 20);
+const bannerPositions = bannerGeometry.attributes.position;
+
+for (let vertex = 0; vertex < bannerPositions.count; vertex++) {
+    const x = bannerPositions.getX(vertex);
+    const y = bannerPositions.getY(vertex);
+    const fold = Math.sin((x + 1.5) * Math.PI / 1.5);
+    bannerPositions.setZ(vertex, fold * 0.16 * Math.cos((y + 2.5) * 0.35));
+}
+
+bannerGeometry.computeVertexNormals();
+
+basicBannerMaterial.side = THREE.DoubleSide;
+
 const banner =
     new THREE.Mesh(
-        new THREE.PlaneGeometry(
-            3,
-            5
-        ),
+        bannerGeometry,
         basicBannerMaterial
     );
 
 banner.position.set(
-    7,
+    6.2,
     5,
-    -10.9
+    -10.3
 );
 
+banner.castShadow = true;
+banner.receiveShadow = true;
 scene.add(banner);
+
+const bannerPole = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12, 0.16, 6.5, 12),
+    basicWoodMaterial
+);
+
+bannerPole.position.set(4.55, 5, -10.2);
+bannerPole.castShadow = true;
+scene.add(bannerPole);
+
+const bannerCrossbar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.08, 0.08, 3.5, 10),
+    basicWoodMaterial
+);
+
+bannerCrossbar.rotation.z = Math.PI / 2;
+bannerCrossbar.position.set(6.2, 7.5, -10.2);
+bannerCrossbar.castShadow = true;
+scene.add(bannerCrossbar);
+
+const bannerFinial = new THREE.Mesh(
+    new THREE.SphereGeometry(0.2, 12, 8),
+    basicWoodMaterial
+);
+
+bannerFinial.position.set(4.55, 8.4, -10.2);
+bannerFinial.castShadow = true;
+scene.add(bannerFinial);
 // ----------------------------------------------------
 // Ambient Light
 // ----------------------------------------------------
