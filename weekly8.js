@@ -77,15 +77,42 @@ const wallNormal =
         "textures/textures/wall/normal.jpg"
     );
 
+const groundRoughness =
+    loader.load(
+        "textures/textures/ground/roughness.jpg"
+    );
+
+const woodRoughness =
+    loader.load(
+        "textures/textures/wood/roughness.jpg"
+    );
+
+
+// Ground texture tiling
+const groundTextures = [
+    groundColor,
+    groundNormal,
+    groundRoughness
+];
+
+groundTextures.forEach((texture) => {
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(8, 8);
+});
+
 // ----------------------------------------------------
 // Ground Plane
 // ----------------------------------------------------
+
+
 const groundGeometry = new THREE.PlaneGeometry(100, 100);
 
 const groundMaterial =
     new THREE.MeshStandardMaterial({
         map: groundColor,
-        normalMap: groundNormal
+        normalMap: groundNormal,
+        roughnessMap: groundRoughness
 });
 
 const ground = new THREE.Mesh(
@@ -110,7 +137,8 @@ const basicStoneMaterial =
 
 const basicWoodMaterial =
     new THREE.MeshStandardMaterial({
-        map: woodColor
+        map: woodColor,
+        roughnessMap: woodRoughness
     });
 
 const basicBannerMaterial =
