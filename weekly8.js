@@ -67,6 +67,16 @@ const bannerColor =
         "textures/textures/banner/color.png"
     );
 
+const groundNormal =
+    loader.load(
+        "textures/textures/ground/normal.jpg"
+    );
+
+const wallNormal =
+    loader.load(
+        "textures/textures/wall/normal.jpg"
+    );
+
 // ----------------------------------------------------
 // Ground Plane
 // ----------------------------------------------------
@@ -74,7 +84,8 @@ const groundGeometry = new THREE.PlaneGeometry(100, 100);
 
 const groundMaterial =
     new THREE.MeshStandardMaterial({
-        map: groundColor
+        map: groundColor,
+        normalMap: groundNormal
 });
 
 const ground = new THREE.Mesh(
@@ -93,7 +104,8 @@ scene.add(ground);
 
 const basicStoneMaterial =
     new THREE.MeshStandardMaterial({
-        map: wallColor
+        map: wallColor,
+        normalMap: wallNormal
     });
 
 const basicWoodMaterial =
